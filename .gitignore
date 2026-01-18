@@ -208,3 +208,5 @@ __marimo__/
 
 # Node.js
 node_modules/
+.vite/
+dist/
