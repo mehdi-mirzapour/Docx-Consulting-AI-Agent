@@ -378,8 +378,15 @@ async def call_tool(name: str, arguments: Any) -> list[TextContent]:
         doc_path = documents[doc_id]["path"]
         modified_path = apply_changes_to_document(doc_path, selected)
         
-        # Store modified document path
+        # Create a user-friendly filename based on original filename
+        original_filename = documents[doc_id]["filename"]
+        # Remove .docx extension if present, add _modified, then add .docx
+        base_name = original_filename.rsplit('.', 1)[0] if '.' in original_filename else original_filename
+        download_filename = f"{base_name}_modified.docx"
+
+        # Store modified document path and download filename
         documents[doc_id]["modified_path"] = modified_path
+        documents[doc_id]["download_filename"] = download_filename
         
         return [
             TextContent(
@@ -387,7 +394,8 @@ async def call_tool(name: str, arguments: Any) -> list[TextContent]:
                 text=f"Applied {len(selected)} changes to document",
                 annotations={
                     "structuredContent": {
-                        "download_url": f"/downloads/{os.path.basename(modified_path)}",
+                        # Use absolute URL for the widget
+                        "download_url": f"http://localhost:8787/api/download/{doc_id}",
                         "applied_count": len(selected),
                     }
                 },
