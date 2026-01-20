@@ -6,6 +6,8 @@ This document analyzes key architectural patterns for building ChatGPT apps base
 
 ![Architecture Diagram](/Users/mehdi/.gemini/antigravity/brain/4ced8fd4-c6dd-441f-9adf-c4a681f8df2f/uploaded_image_1768767457887.png)
 
+Reference: [YouTube Video](https://www.youtube.com/watch?v=VvuOBOmw9H8&t=327s)
+
 ## Core Components
 
 ### 1. MCP Server (Port 8787) - "The Brain"
