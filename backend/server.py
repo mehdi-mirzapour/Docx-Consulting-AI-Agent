@@ -781,7 +781,7 @@ fastapi_app.add_middleware(
 @fastapi_app.get("/api", tags=["Health"])
 @fastapi_app.get("/api/", tags=["Health"])
 async def handle_root():
-    return {"status": "healthy", "message": "MCP Server is running"}
+    return {"status": "healthy", "message": "API is healthy"}
 
 @fastapi_app.post("/api/upload", tags=["Documents"])
 async def handle_upload(file: UploadFile = File(...)):
