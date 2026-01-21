@@ -1,0 +1,44 @@
+# Node modules
+**/node_modules
+**/dist
+**/.vite
+
+# Python
+**/__pycache__
+**/*.pyc
+**/.venv
+**/venv
+
+# Environment files
+.env
+.env.local
+
+# Git
+.git
+.gitignore
+
+# IDE
+.vscode
+.idea
+
+# Logs
+**/*.log
+**/server.log
+
+# Uploads
+**/uploads/*
+
+# OS files
+.DS_Store
+
+# Documentation
+*.md
+!README.md
+
+# GitHub
+.github
+
+# Test files
+**/test_*.py
+**/*_test.py
+**/tests
