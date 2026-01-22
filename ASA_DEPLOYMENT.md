@@ -1,22 +1,27 @@
-# 🚀 Azure Deployment Guide - Nginx Gateway Edition
+# 🚀 ASA (Azure App Service) Deployment Guide
 
-This guide deploys your **3-Docker Architecture** (MCP, Frontend, Nginx) to Azure.
+This guide replaces the general Azure deployment and focuses on **Azure App Service (ASA)** using a multi-container Docker Compose approach.
 
-**Why this architecture?**
-- Eliminates **Azure Front Door** (Compatible with Free/Student accounts).
-- Uses **Nginx** as your Gateway/Router (Just like your local setup).
-- Deploys as a **Single Multi-Container App Service** (Cost effective).
+## Architecture
 
+```mermaid
+graph TD
+    User((User)) -->|Public IP / Port 80| ASA[Azure App Service]
+    
+    subgraph "ASA Multi-Container Host"
+        ASA -->|Routes| Nginx[Nginx Gateway]
+        Nginx -->|Proxy /api| MCP[MCP Backend]
+        Nginx -->|Proxy /| FE[Frontend]
+        
+        MCP -.->|OpenAI SDK| GPT4[ChatGPT / GPT-4o]
+        
+        ENV[.env / AppSettings] -->|Inject Key| MCP
+    end
+    
+    ACR[Azure Container Registry] -->|Pull All Images| ASA
 ```
-                  ┌───────────────────────────────┐
-                  │      Azure App Service        │
-                  │    (Multi-Container Mode)     │
-    [User] ──────▶│ [Nginx Gateway] (Port 80)     │
-                  │       │          │            │
-                  │       ▼          ▼            │
-                  │  [Frontend]    [MCP API]      │
-                  └───────────────────────────────┘
-```
+
+The deployment is managed as a **Single Multi-Container App Service**, which is cost-effective and easy to manage for small-to-medium solutions.
 
 **Names used:**
 - **Resource Group:** `docxai-rg`
